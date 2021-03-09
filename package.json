@@ -1,6 +1,7 @@
 {
+	"publisher": "baincd",
 	"name": "copy-path-unixstyle",
-	"displayName": "copy-path-unixstyle",
+	"displayName": "Copy Path (Unix Style)",
 	"description": "Copy Windows paths to clipboard in Unix/Linux/POSIX style",
 	"version": "0.0.1",
 	"engines": {
