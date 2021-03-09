@@ -5,6 +5,10 @@
 	"description": "Copy Windows paths to clipboard in Unix/Linux/POSIX style",
 	"version": "0.0.1",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/baincd/vscode-copy-path-unixstyle"
+	},
 	"engines": {
 		"vscode": "^1.50.0"
 	},
