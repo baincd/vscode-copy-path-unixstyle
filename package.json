@@ -11,16 +11,47 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:copy-path-unixstyle.helloWorld"
+		"onCommand:copy-path-unixstyle.copyPath",
+		"onCommand:copy-path-unixstyle.copyRelativePath"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "copy-path-unixstyle.helloWorld",
-				"title": "Hello World"
+				"command": "copy-path-unixstyle.copyPath",
+				"title": "Copy Path (Unix Style)"
+			},
+			{
+				"command": "copy-path-unixstyle.copyRelativePath",
+				"title": "Copy Relative Path (Unix Style)"
 			}
-		]
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "copy-path-unixstyle.copyPath",
+					"group": "6_copypath",
+					"when": "isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyRelativePath",
+					"group": "6_copypath",
+					"when": "isFileSystemResource"
+				}
+			],
+			"editor/title/context": [
+				{
+					"command": "copy-path-unixstyle.copyPath",
+					"group": "1_cutcopypaste",
+					"when": "isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyRelativePath",
+					"group": "1_cutcopypaste",
+					"when": "isFileSystemResource"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

@@ -1,27 +1,53 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+const isWindows = process.platform === 'win32';
+const lineDelimiter = isWindows ? '\r\n' : '\n';
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "copy-path-unixstyle" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('copy-path-unixstyle.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from copy-path-unixstyle!');
-	});
-
-	context.subscriptions.push(disposable);
+enum CopyPathType {
+	FULL_PATH,
+	RELATIVE_PATH
 }
 
-// this method is called when your extension is deactivated
-export function deactivate() {}
+function copyPathsToClipboardUnixStyle(copyPathType: CopyPathType, arg1: any, arg2: any) {
+	let resources: vscode.Uri[] | undefined;
+	if (Array.isArray(arg2)) {
+		resources = arg2;
+	} else if (arg1) {
+		resources = [arg1];
+	} else {
+		if (vscode.window.activeTextEditor && vscode.window.activeTextEditor.document.uri) {
+			resources = [vscode.window.activeTextEditor.document.uri];
+		}
+	}
+
+	if (resources) {
+		const paths: string[] = [];
+		for (const resource of resources) {
+			let path = "";
+			if (copyPathType == CopyPathType.FULL_PATH) {
+				path = resource.path;
+			} else if (copyPathType == CopyPathType.RELATIVE_PATH) {
+				path = vscode.workspace.asRelativePath(resource, false);
+			}
+			if (path) {
+				paths.push(isWindows ? path.replace(/\\/g, '/').replace(/^(\/[A-Za-z]):\//, '$1/') : path);
+			}
+		}
+
+		if (paths.length > 0) {
+			vscode.env.clipboard.writeText(paths.join(lineDelimiter));
+		}
+	}
+}
+
+export function activate(context: vscode.ExtensionContext) {
+	context.subscriptions.push(vscode.commands.registerCommand('copy-path-unixstyle.copyPath', (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, arg1, arg2);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand('copy-path-unixstyle.copyRelativePath', (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.RELATIVE_PATH, arg1, arg2);
+	}));
+}
+
+export function deactivate() { }
