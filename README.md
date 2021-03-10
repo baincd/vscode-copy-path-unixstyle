@@ -20,10 +20,6 @@ Adds commands to copy the active file path and file relative paths in Unix style
 
 )
 
-## Requirements
-
-This has been tested in vscode 1.50.1.  It may work in earlier versions as well, but YMMV.
-
 ## Acknowledgements
 
 This extension was inspired by the following extensions.  I am extremely grateful to have these extensions as a reference and inspiration.  Thank you.
