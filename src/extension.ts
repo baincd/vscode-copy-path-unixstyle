@@ -8,7 +8,19 @@ enum CopyPathType {
 	RELATIVE_PATH
 }
 
-function copyPathsToClipboardUnixStyle(copyPathType: CopyPathType, arg1: any, arg2: any) {
+interface ConvertWindowUri {
+	(winUri: string): string
+}
+
+const fullPathCopyGitBashFormat      = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, '/$1/');
+
+const fullPathCopyWslFormat          = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, '/mnt/$1/');
+
+const fullPathCopyCygwinFormat       = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, '/cygdrive/$1/');
+
+const fullPathCopyUniversalWinFormat = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, (match, driveLetter: string) => driveLetter.toUpperCase() + ':/');
+
+function copyPathsToClipboardUnixStyle(copyPathType: CopyPathType, convertMethod: ConvertWindowUri, arg1: any, arg2: any) {
 	let resources: vscode.Uri[] | undefined;
 	if (Array.isArray(arg2)) {
 		resources = arg2;
@@ -24,13 +36,13 @@ function copyPathsToClipboardUnixStyle(copyPathType: CopyPathType, arg1: any, ar
 		const paths: string[] = [];
 		for (const resource of resources) {
 			let path = "";
-			if (copyPathType == CopyPathType.FULL_PATH) {
+			if (copyPathType === CopyPathType.FULL_PATH) {
 				path = resource.path;
-			} else if (copyPathType == CopyPathType.RELATIVE_PATH) {
+			} else if (copyPathType === CopyPathType.RELATIVE_PATH) {
 				path = vscode.workspace.asRelativePath(resource, false);
 			}
 			if (path) {
-				paths.push(isWindows ? path.replace(/\\/g, '/').replace(/^(\/[A-Za-z]):\//, '$1/') : path);
+				paths.push(isWindows ? convertMethod(path) : path);
 			}
 		}
 
@@ -40,13 +52,26 @@ function copyPathsToClipboardUnixStyle(copyPathType: CopyPathType, arg1: any, ar
 	}
 }
 
+
 export function activate(context: vscode.ExtensionContext) {
-	context.subscriptions.push(vscode.commands.registerCommand('copy-path-unixstyle.copyPath', (arg1, arg2) => {
-		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, arg1, arg2);
+	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathGitBashFormat", (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyGitBashFormat, arg1, arg2);
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('copy-path-unixstyle.copyRelativePath', (arg1, arg2) => {
-		copyPathsToClipboardUnixStyle(CopyPathType.RELATIVE_PATH, arg1, arg2);
+	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathWSLFormat", (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyWslFormat, arg1, arg2);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathCygwinFormat", (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyCygwinFormat, arg1, arg2);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathUniversalFormat", (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyUniversalWinFormat, arg1, arg2);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyRelativePath", (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.RELATIVE_PATH, fullPathCopyGitBashFormat, arg1, arg2);
 	}));
 }
 

@@ -23,8 +23,20 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "copy-path-unixstyle.copyPath",
-				"title": "Copy Path (Unix Style)"
+				"command": "copy-path-unixstyle.copyPathGitBashFormat",
+				"title": "Copy Path (Unix Style - Git Bash format)"
+			},
+			{
+				"command": "copy-path-unixstyle.copyPathWSLFormat",
+				"title": "Copy Path (Unix Style - WSL format)"
+			},
+			{
+				"command": "copy-path-unixstyle.copyPathCygwinFormat",
+				"title": "Copy Path (Unix Style - Cygwin format)"
+			},
+			{
+				"command": "copy-path-unixstyle.copyPathUniversalFormat",
+				"title": "Copy Path (Unix Style - Universal Windows format)"
 			},
 			{
 				"command": "copy-path-unixstyle.copyRelativePath",
@@ -34,7 +46,22 @@
 		"menus": {
 			"explorer/context": [
 				{
-					"command": "copy-path-unixstyle.copyPath",
+					"command": "copy-path-unixstyle.copyPathGitBashFormat",
+					"group": "6_copypath",
+					"when": "isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyPathWSLFormat",
+					"group": "6_copypath",
+					"when": "isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyPathCygwinFormat",
+					"group": "6_copypath",
+					"when": "isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyPathUniversalFormat",
 					"group": "6_copypath",
 					"when": "isFileSystemResource"
 				},
@@ -46,7 +73,22 @@
 			],
 			"editor/title/context": [
 				{
-					"command": "copy-path-unixstyle.copyPath",
+					"command": "copy-path-unixstyle.copyPathGitBashFormat",
+					"group": "1_cutcopypaste",
+					"when": "isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyPathWSLFormat",
+					"group": "1_cutcopypaste",
+					"when": "isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyPathCygwinFormat",
+					"group": "1_cutcopypaste",
+					"when": "isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyPathUniversalFormat",
 					"group": "1_cutcopypaste",
 					"when": "isFileSystemResource"
 				},
