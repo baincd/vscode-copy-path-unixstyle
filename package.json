@@ -21,22 +21,52 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": [
+			{
+				"properties": {
+					"copy-path-unixstyle.copyPathGitBashFormat.enable": {
+						"type": "boolean",
+						"default": true,
+						"markdownDescription": "Enable 'Copy Path (Unix Style - Git Bash format)' command"
+					},
+					"copy-path-unixstyle.copyPathWSLFormat.enable": {
+						"type": "boolean",
+						"default": false,
+						"markdownDescription": "Enable 'Copy Path (Unix Style - WSL format)' command"
+					},
+					"copy-path-unixstyle.copyPathCygwinFormat.enable": {
+						"type": "boolean",
+						"default": false,
+						"markdownDescription": "Enable 'Copy Path (Unix Style - Cygwin format)' command"
+					},
+					"copy-path-unixstyle.copyPathUniversalFormat.enable": {
+						"type": "boolean",
+						"default": false,
+						"markdownDescription": "Enable 'Copy Path (Unix Style - Universal Windows format)' command"
+					}
+				}
+			}
+		],
 		"commands": [
 			{
 				"command": "copy-path-unixstyle.copyPathGitBashFormat",
-				"title": "Copy Path (Unix Style - Git Bash format)"
+				"title": "Copy Path (Unix Style - Git Bash format)",
+				"enablement": "config.copy-path-unixstyle.copyPathGitBashFormat.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyPathWSLFormat",
-				"title": "Copy Path (Unix Style - WSL format)"
+				"title": "Copy Path (Unix Style - WSL format)",
+				"enablement": "config.copy-path-unixstyle.copyPathWSLFormat.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyPathCygwinFormat",
-				"title": "Copy Path (Unix Style - Cygwin format)"
+				"title": "Copy Path (Unix Style - Cygwin format)",
+				"enablement": "config.copy-path-unixstyle.copyPathCygwinFormat.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyPathUniversalFormat",
-				"title": "Copy Path (Unix Style - Universal Windows format)"
+				"title": "Copy Path (Unix Style - Universal Windows format)",
+				"enablement": "config.copy-path-unixstyle.copyPathUniversalFormat.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyRelativePath",
@@ -48,22 +78,22 @@
 				{
 					"command": "copy-path-unixstyle.copyPathGitBashFormat",
 					"group": "6_copypath",
-					"when": "isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathGitBashFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathWSLFormat",
 					"group": "6_copypath",
-					"when": "isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathWSLFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathCygwinFormat",
 					"group": "6_copypath",
-					"when": "isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathCygwinFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathUniversalFormat",
 					"group": "6_copypath",
-					"when": "isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathUniversalFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyRelativePath",
@@ -75,22 +105,22 @@
 				{
 					"command": "copy-path-unixstyle.copyPathGitBashFormat",
 					"group": "1_cutcopypaste",
-					"when": "isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathGitBashFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathWSLFormat",
 					"group": "1_cutcopypaste",
-					"when": "isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathWSLFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathCygwinFormat",
 					"group": "1_cutcopypaste",
-					"when": "isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathCygwinFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathUniversalFormat",
 					"group": "1_cutcopypaste",
-					"when": "isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathUniversalFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyRelativePath",
