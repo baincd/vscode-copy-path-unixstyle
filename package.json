@@ -15,6 +15,14 @@
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"Unix",
+		"Linux",
+		"POSIX",
+		"gitbash",
+		"wsl",
+		"cygwin"
+	],
 	"activationEvents": [
 		"onCommand:copy-path-unixstyle.copyPath",
 		"onCommand:copy-path-unixstyle.copyRelativePath"

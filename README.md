@@ -1,10 +1,10 @@
 # Copy Path (Unix Style)
 
-Copy Windows paths to clipboard in Unix/Linux/POSIX style
+Copy Windows paths to clipboard in Unix/Linux/POSIX style.  Can be used to copy paths for use in Git Bash, WSL, Cygwin, or in Windows format using forward-slashes ('/')
 
 ## Features
 
-Adds commands to copy the active file path and file relative paths in Unix style
+By default, the extension adds the following commands to copy the active file path and file relative paths in Unix style
 
 - Copy Path (Unix Style): `/c/chris/project-name/src/extension.ts`
 - Copy Relative Path (Unix Style): `src/extension.ts`
@@ -18,7 +18,31 @@ Adds commands to copy the active file path and file relative paths in Unix style
 ### Explorer Context Menu
 ![](images/explorer-context-menu-ex.png)
 
-)
+## Customization
+
+### Default Format
+
+The format used by default can be modified via the `copy-path-unixstyle.defaultFormat` setting:
+
+| Format           | Example                                           | Default |
+|------------------|---------------------------------------------------|---------|
+| GitBash          | `/c/chris/project-name/src/extension.ts`          | ✔️       |
+| WSL              | `/mnt/c/chris/project-name/src/extension.ts`      |         |
+| Cygwin           | `/cygdrive/c/chris/project-name/src/extension.ts` |         |
+| UniversalWindows | `C:/chris/project-name/src/extension.ts`          |         |
+
+### Additional Commands
+
+If you want to be able to copy paths in multiple formats, you can enable additional commands with the following settings:
+
+| Setting                                              | Enables Command                                   | Default |
+|------------------------------------------------------|---------------------------------------------------|---------|
+| `copy-path-unixstyle.copyPath.enable`                | Copy Path (Unix Style)                            | true    |
+| `copy-path-unixstyle.copyPathGitBashFormat.enable`   | Copy Path (Unix Style - Git Bash format)          | false   |
+| `copy-path-unixstyle.copyPathWSLFormat.enable`       | Copy Path (Unix Style - WSL format)               | false   |
+| `copy-path-unixstyle.copyPathCygwinFormat.enable`    | Copy Path (Unix Style - Cygwin format)            | false   |
+| `copy-path-unixstyle.copyPathUniversalFormat.enable` | Copy Path (Unix Style - Universal Windows format) | false   |
+
 
 ## Acknowledgements
 
