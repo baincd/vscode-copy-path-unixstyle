@@ -20,6 +20,19 @@ const fullPathCopyCygwinFormat       = (winUri: string) => winUri.replace(/\\/g,
 
 const fullPathCopyUniversalWinFormat = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, (match, driveLetter: string) => driveLetter.toUpperCase() + ':/');
 
+function defaultConvertWindowUri(): ConvertWindowUri {
+	const defaultFormat = vscode.workspace.getConfiguration("copy-path-unixstyle").get<string>("defaultFormat");
+	switch (defaultFormat) {
+		case "GitBash": return fullPathCopyGitBashFormat;
+		case "WSL": return fullPathCopyWslFormat;
+		case "Cygwin": return fullPathCopyCygwinFormat;
+		case "UniversalWindows": return fullPathCopyUniversalWinFormat;
+		default: 
+			vscode.window.showErrorMessage("Error in copy-path-unixstyle.defaultFormat setting - defaulting to GitBash");
+			return fullPathCopyGitBashFormat;
+	}
+}
+
 function copyPathsToClipboardUnixStyle(copyPathType: CopyPathType, convertMethod: ConvertWindowUri, arg1: any, arg2: any) {
 	let resources: vscode.Uri[] | undefined;
 	if (Array.isArray(arg2)) {
@@ -52,8 +65,11 @@ function copyPathsToClipboardUnixStyle(copyPathType: CopyPathType, convertMethod
 	}
 }
 
-
 export function activate(context: vscode.ExtensionContext) {
+	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPath", (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, defaultConvertWindowUri(), arg1, arg2);
+	}));
+
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathGitBashFormat", (arg1, arg2) => {
 		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyGitBashFormat, arg1, arg2);
 	}));
@@ -71,7 +87,7 @@ export function activate(context: vscode.ExtensionContext) {
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyRelativePath", (arg1, arg2) => {
-		copyPathsToClipboardUnixStyle(CopyPathType.RELATIVE_PATH, fullPathCopyGitBashFormat, arg1, arg2);
+		copyPathsToClipboardUnixStyle(CopyPathType.RELATIVE_PATH, defaultConvertWindowUri(), arg1, arg2);
 	}));
 }
 

@@ -24,9 +24,31 @@
 		"configuration": [
 			{
 				"properties": {
-					"copy-path-unixstyle.copyPathGitBashFormat.enable": {
+					"copy-path-unixstyle.defaultFormat": {
+						"type": "string",
+						"enum": [
+							"GitBash",
+							"WSL",
+							"Cygwin",
+							"UniversalWindows"
+						],
+						"markdownEnumDescriptions": [
+							"Git Bash format (ex: `/c/Users/baincd/file.txt`)",
+							"WSL format (ex: `/mnt/c/Users/baincd/file.txt`)",
+							"Cygwin format (ex: `/cygdrive/c/Users/baincd/file.txt`)",
+							"Universal Windows format (ex: `C:/Users/baincd/file.txt`)"
+						],
+						"default": "GitBash",
+						"markdownDescription": "The default format to use for 'Copy Path (Unix Style)' and 'Copy Relative Path (Unix Style)' commands"
+					},
+					"copy-path-unixstyle.copyPath.enable": {
 						"type": "boolean",
 						"default": true,
+						"markdownDescription": "Enable 'Copy Path (Unix Style)' command"
+					},
+					"copy-path-unixstyle.copyPathGitBashFormat.enable": {
+						"type": "boolean",
+						"default": false,
 						"markdownDescription": "Enable 'Copy Path (Unix Style - Git Bash format)' command"
 					},
 					"copy-path-unixstyle.copyPathWSLFormat.enable": {
@@ -48,6 +70,11 @@
 			}
 		],
 		"commands": [
+			{
+				"command": "copy-path-unixstyle.copyPath",
+				"title": "Copy Path (Unix Style)",
+				"enablement": "config.copy-path-unixstyle.copyPath.enable"
+			},
 			{
 				"command": "copy-path-unixstyle.copyPathGitBashFormat",
 				"title": "Copy Path (Unix Style - Git Bash format)",
@@ -76,6 +103,11 @@
 		"menus": {
 			"explorer/context": [
 				{
+					"command": "copy-path-unixstyle.copyPath",
+					"group": "6_copypath",
+					"when": "config.copy-path-unixstyle.copyPath.enable && isFileSystemResource"
+				},
+				{
 					"command": "copy-path-unixstyle.copyPathGitBashFormat",
 					"group": "6_copypath",
 					"when": "config.copy-path-unixstyle.copyPathGitBashFormat.enable && isFileSystemResource"
@@ -102,6 +134,11 @@
 				}
 			],
 			"editor/title/context": [
+				{
+					"command": "copy-path-unixstyle.copyPath",
+					"group": "1_cutcopypaste",
+					"when": "config.copy-path-unixstyle.copyPath.enable && isFileSystemResource"
+				},
 				{
 					"command": "copy-path-unixstyle.copyPathGitBashFormat",
 					"group": "1_cutcopypaste",
