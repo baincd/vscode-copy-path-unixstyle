@@ -12,13 +12,13 @@ interface ConvertWindowUri {
 	(winUri: string): string
 }
 
-const fullPathCopyGitBashFormat      = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, '/$1/');
+const fullPathCopyGitBashFormat      = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/$1/');
 
-const fullPathCopyWslFormat          = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, '/mnt/$1/');
+const fullPathCopyWslFormat          = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/mnt/$1/');
 
-const fullPathCopyCygwinFormat       = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, '/cygdrive/$1/');
+const fullPathCopyCygwinFormat       = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/cygdrive/$1/');
 
-const fullPathCopyUniversalWinFormat = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/([A-Za-z]):\//, (match, driveLetter: string) => driveLetter.toUpperCase() + ':/');
+const fullPathCopyUniversalWinFormat = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, (match, driveLetter: string) => driveLetter.toUpperCase() + ':/');
 
 function defaultConvertWindowUri(): ConvertWindowUri {
 	const defaultFormat = vscode.workspace.getConfiguration("copy-path-unixstyle").get<string>("defaultFormat");
