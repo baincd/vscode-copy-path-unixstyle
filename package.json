@@ -2,7 +2,7 @@
 	"publisher": "baincd",
 	"name": "copy-path-unixstyle",
 	"displayName": "Copy Path (Unix Style)",
-	"description": "Copy Windows paths to clipboard in Unix/Linux/POSIX style",
+	"description": "Copy absolute and relative Windows paths to clipboard in Unix/Linux/POSIX style.  Can be configured to copy paths in Git Bash format, WSL format, Cygwin format, Windows forward-slash format, and Windows double-backslash format.",
 	"version": "2.0.0-RC1",
 	"license": "MIT",
 	"repository": {
