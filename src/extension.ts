@@ -12,24 +12,24 @@ interface ConvertWindowUri {
 	(winUri: string): string
 }
 
-const fullPathCopyGitBashFormat      = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/$1/');
+const convertPathToGitBashFormat      = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/$1/');
 
-const fullPathCopyWslFormat          = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/mnt/$1/');
+const convertPathToWslFormat          = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/mnt/$1/');
 
-const fullPathCopyCygwinFormat       = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/cygdrive/$1/');
+const convertPathToCygwinFormat       = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/cygdrive/$1/');
 
-const fullPathCopyUniversalWinFormat = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, (match, driveLetter: string) => driveLetter.toUpperCase() + ':/');
+const convertPathToUniversalWinFormat = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, (match, driveLetter: string) => driveLetter.toUpperCase() + ':/');
 
 function defaultConvertWindowUri(): ConvertWindowUri {
 	const defaultFormat = vscode.workspace.getConfiguration("copy-path-unixstyle").get<string>("defaultFormat");
 	switch (defaultFormat) {
-		case "GitBash": return fullPathCopyGitBashFormat;
-		case "WSL": return fullPathCopyWslFormat;
-		case "Cygwin": return fullPathCopyCygwinFormat;
-		case "UniversalWindows": return fullPathCopyUniversalWinFormat;
+		case "GitBash": return convertPathToGitBashFormat;
+		case "WSL": return convertPathToWslFormat;
+		case "Cygwin": return convertPathToCygwinFormat;
+		case "UniversalWindows": return convertPathToUniversalWinFormat;
 		default: 
 			vscode.window.showErrorMessage("Error in copy-path-unixstyle.defaultFormat setting - defaulting to GitBash");
-			return fullPathCopyGitBashFormat;
+			return convertPathToGitBashFormat;
 	}
 }
 
@@ -71,19 +71,19 @@ export function activate(context: vscode.ExtensionContext) {
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathGitBashFormat", (arg1, arg2) => {
-		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyGitBashFormat, arg1, arg2);
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, convertPathToGitBashFormat, arg1, arg2);
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathWSLFormat", (arg1, arg2) => {
-		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyWslFormat, arg1, arg2);
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, convertPathToWslFormat, arg1, arg2);
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathCygwinFormat", (arg1, arg2) => {
-		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyCygwinFormat, arg1, arg2);
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, convertPathToCygwinFormat, arg1, arg2);
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathUniversalFormat", (arg1, arg2) => {
-		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, fullPathCopyUniversalWinFormat, arg1, arg2);
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, convertPathToUniversalWinFormat, arg1, arg2);
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyRelativePath", (arg1, arg2) => {
