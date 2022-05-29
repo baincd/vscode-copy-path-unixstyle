@@ -56,37 +56,36 @@
 						"default": "GitBash",
 						"markdownDescription": "The default format to use for 'Copy Path (Unix Style)' and 'Copy Relative Path (Unix Style)' commands"
 					},
-					"copy-path-unixstyle.copyPath.enable": {
+					"copy-path-unixstyle.copyPathCommand.enable": {
 						"type": "boolean",
 						"default": true,
 						"markdownDescription": "Enable 'Copy Path (Unix Style)' command"
 					},
-					"copy-path-unixstyle.copyPathGitBashFormat.enable": {
+					"copy-path-unixstyle.copyPathGitBashFormatCommand.enable": {
 						"type": "boolean",
 						"default": false,
 						"markdownDescription": "Enable 'Copy Path (Unix Style - Git Bash format)' command"
 					},
-					"copy-path-unixstyle.copyPathWSLFormat.enable": {
+					"copy-path-unixstyle.copyPathWSLFormatCommand.enable": {
 						"type": "boolean",
 						"default": false,
 						"markdownDescription": "Enable 'Copy Path (Unix Style - WSL format)' command"
 					},
-					"copy-path-unixstyle.copyPathCygwinFormat.enable": {
+					"copy-path-unixstyle.copyPathCygwinFormatCommand.enable": {
 						"type": "boolean",
 						"default": false,
 						"markdownDescription": "Enable 'Copy Path (Unix Style - Cygwin format)' command"
 					},
-					"copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable": {
+					"copy-path-unixstyle.copyPathWindowsForwardSlashFormatCommand.enable": {
 						"type": "boolean",
 						"default": false,
 						"markdownDescription": "Enable 'Copy Path (Unix Style - Windows format using /)' command"
 					},
-					"copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable": {
+					"copy-path-unixstyle.copyPathWindowsDblBackslashFormatCommand.enable": {
 						"type": "boolean",
 						"default": false,
 						"markdownDescription": "Enable 'Copy Path (Unix Style - Windows format using \\\\\\\\)' command"
 					}
-
 				}
 			}
 		],
@@ -94,32 +93,32 @@
 			{
 				"command": "copy-path-unixstyle.copyPath",
 				"title": "Copy Path (Unix Style)",
-				"enablement": "config.copy-path-unixstyle.copyPath.enable"
+				"enablement": "config.copy-path-unixstyle.copyPathCommand.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyPathGitBashFormat",
 				"title": "Copy Path (Unix Style - Git Bash format)",
-				"enablement": "config.copy-path-unixstyle.copyPathGitBashFormat.enable"
+				"enablement": "config.copy-path-unixstyle.copyPathGitBashFormatCommand.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyPathWSLFormat",
 				"title": "Copy Path (Unix Style - WSL format)",
-				"enablement": "config.copy-path-unixstyle.copyPathWSLFormat.enable"
+				"enablement": "config.copy-path-unixstyle.copyPathWSLFormatCommand.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyPathCygwinFormat",
 				"title": "Copy Path (Unix Style - Cygwin format)",
-				"enablement": "config.copy-path-unixstyle.copyPathCygwinFormat.enable"
+				"enablement": "config.copy-path-unixstyle.copyPathCygwinFormatCommand.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyPathWindowsForwardSlashFormat",
 				"title": "Copy Path (Unix Style - Windows format using /)",
-				"enablement": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable"
+				"enablement": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormatCommand.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyPathWindowsDblBackslashFormat",
 				"title": "Copy Path (Unix Style - Windows format using \\\\)",
-				"enablement": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable"
+				"enablement": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormatCommand.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyRelativePath",
@@ -131,32 +130,32 @@
 				{
 					"command": "copy-path-unixstyle.copyPath",
 					"group": "6_copypath",
-					"when": "config.copy-path-unixstyle.copyPath.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathGitBashFormat",
 					"group": "6_copypath",
-					"when": "config.copy-path-unixstyle.copyPathGitBashFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathGitBashFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathWSLFormat",
 					"group": "6_copypath",
-					"when": "config.copy-path-unixstyle.copyPathWSLFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathWSLFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathCygwinFormat",
 					"group": "6_copypath",
-					"when": "config.copy-path-unixstyle.copyPathCygwinFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathCygwinFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathWindowsForwardSlashFormat",
 					"group": "6_copypath",
-					"when": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathWindowsDblBackslashFormat",
 					"group": "6_copypath",
-					"when": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyRelativePath",
@@ -168,32 +167,32 @@
 				{
 					"command": "copy-path-unixstyle.copyPath",
 					"group": "1_cutcopypaste",
-					"when": "config.copy-path-unixstyle.copyPath.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathGitBashFormat",
 					"group": "1_cutcopypaste",
-					"when": "config.copy-path-unixstyle.copyPathGitBashFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathGitBashFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathWSLFormat",
 					"group": "1_cutcopypaste",
-					"when": "config.copy-path-unixstyle.copyPathWSLFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathWSLFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathCygwinFormat",
 					"group": "1_cutcopypaste",
-					"when": "config.copy-path-unixstyle.copyPathCygwinFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathCygwinFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathWindowsForwardSlashFormat",
 					"group": "1_cutcopypaste",
-					"when": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyPathWindowsDblBackslashFormat",
 					"group": "1_cutcopypaste",
-					"when": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable && isFileSystemResource"
+					"when": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormatCommand.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyRelativePath",

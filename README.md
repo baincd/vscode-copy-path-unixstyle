@@ -36,14 +36,14 @@ The format used by default can be modified via the `copy-path-unixstyle.defaultF
 
 If you want to be able to copy paths in multiple formats, you can enable additional commands with the following settings:
 
-| Setting                                                        | Enables Command                                    | Default |
-|----------------------------------------------------------------|----------------------------------------------------|---------|
-| `copy-path-unixstyle.copyPath.enable`                          | Copy Path (Unix Style)                             | true    |
-| `copy-path-unixstyle.copyPathGitBashFormat.enable`             | Copy Path (Unix Style - Git Bash format)           | false   |
-| `copy-path-unixstyle.copyPathWSLFormat.enable`                 | Copy Path (Unix Style - WSL format)                | false   |
-| `copy-path-unixstyle.copyPathCygwinFormat.enable`              | Copy Path (Unix Style - Cygwin format)             | false   |
-| `copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable` | Copy Path (Unix Style - Windows format using /)    | false   |
-| `copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable` | Copy Path (Unix Style - Windows format using \\\\) | false   |
+| Setting                                                               | Enables Command                                    | Default |
+|-----------------------------------------------------------------------|----------------------------------------------------|---------|
+| `copy-path-unixstyle.copyPathCommand.enable`                          | Copy Path (Unix Style)                             | true    |
+| `copy-path-unixstyle.copyPathGitBashFormatCommand.enable`             | Copy Path (Unix Style - Git Bash format)           | false   |
+| `copy-path-unixstyle.copyPathWSLFormatCommand.enable`                 | Copy Path (Unix Style - WSL format)                | false   |
+| `copy-path-unixstyle.copyPathCygwinFormatCommand.enable`              | Copy Path (Unix Style - Cygwin format)             | false   |
+| `copy-path-unixstyle.copyPathWindowsForwardSlashFormatCommand.enable` | Copy Path (Unix Style - Windows format using /)    | false   |
+| `copy-path-unixstyle.copyPathWindowsDblBackslashFormatCommand.enable` | Copy Path (Unix Style - Windows format using \\\\) | false   |
 
 
 ## Acknowledgements
