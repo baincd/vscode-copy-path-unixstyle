@@ -24,24 +24,24 @@ By default, the extension adds the following commands to copy the active file pa
 
 The format used by default can be modified via the `copy-path-unixstyle.defaultFormat` setting:
 
-| Format           | Example                                           | Default |
-|------------------|---------------------------------------------------|---------|
-| GitBash          | `/c/chris/project-name/src/extension.ts`          | ✔️       |
-| WSL              | `/mnt/c/chris/project-name/src/extension.ts`      |         |
-| Cygwin           | `/cygdrive/c/chris/project-name/src/extension.ts` |         |
-| UniversalWindows | `C:/chris/project-name/src/extension.ts`          |         |
+| Format              | Example                                           | Default |
+|---------------------|---------------------------------------------------|---------|
+| GitBash             | `/c/chris/project-name/src/extension.ts`          | ✔️       |
+| WSL                 | `/mnt/c/chris/project-name/src/extension.ts`      |         |
+| Cygwin              | `/cygdrive/c/chris/project-name/src/extension.ts` |         |
+| WindowsForwardSlash | `C:/chris/project-name/src/extension.ts`          |         |
 
 ### Additional Commands
 
 If you want to be able to copy paths in multiple formats, you can enable additional commands with the following settings:
 
-| Setting                                              | Enables Command                                   | Default |
-|------------------------------------------------------|---------------------------------------------------|---------|
-| `copy-path-unixstyle.copyPath.enable`                | Copy Path (Unix Style)                            | true    |
-| `copy-path-unixstyle.copyPathGitBashFormat.enable`   | Copy Path (Unix Style - Git Bash format)          | false   |
-| `copy-path-unixstyle.copyPathWSLFormat.enable`       | Copy Path (Unix Style - WSL format)               | false   |
-| `copy-path-unixstyle.copyPathCygwinFormat.enable`    | Copy Path (Unix Style - Cygwin format)            | false   |
-| `copy-path-unixstyle.copyPathUniversalFormat.enable` | Copy Path (Unix Style - Universal Windows format) | false   |
+| Setting                                                        | Enables Command                                 | Default |
+|----------------------------------------------------------------|-------------------------------------------------|---------|
+| `copy-path-unixstyle.copyPath.enable`                          | Copy Path (Unix Style)                          | true    |
+| `copy-path-unixstyle.copyPathGitBashFormat.enable`             | Copy Path (Unix Style - Git Bash format)        | false   |
+| `copy-path-unixstyle.copyPathWSLFormat.enable`                 | Copy Path (Unix Style - WSL format)             | false   |
+| `copy-path-unixstyle.copyPathCygwinFormat.enable`              | Copy Path (Unix Style - Cygwin format)          | false   |
+| `copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable` | Copy Path (Unix Style - Windows format using /) | false   |
 
 
 ## Acknowledgements
