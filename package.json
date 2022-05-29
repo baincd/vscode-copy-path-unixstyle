@@ -3,7 +3,7 @@
 	"name": "copy-path-unixstyle",
 	"displayName": "Copy Path (Unix Style)",
 	"description": "Copy Windows paths to clipboard in Unix/Linux/POSIX style",
-	"version": "1.0.1",
+	"version": "2.0.0-RC1",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
