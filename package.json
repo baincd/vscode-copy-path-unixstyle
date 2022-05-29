@@ -25,7 +25,11 @@
 	],
 	"activationEvents": [
 		"onCommand:copy-path-unixstyle.copyPath",
-		"onCommand:copy-path-unixstyle.copyRelativePath"
+		"onCommand:copy-path-unixstyle.copyRelativePath",
+		"onCommand:copy-path-unixstyle.copyPathGitBashFormat",
+		"onCommand:copy-path-unixstyle.copyPathWSLFormat",
+		"onCommand:copy-path-unixstyle.copyPathCygwinFormat",
+		"onCommand:copy-path-unixstyle.copyPathUniversalFormat"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
