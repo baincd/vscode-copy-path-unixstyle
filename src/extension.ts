@@ -20,6 +20,8 @@ const convertPathToCygwinFormat              = (winUri: string) => winUri.replac
 
 const convertPathToWindowsForwardSlashFormat = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, (match, driveLetter: string) => driveLetter.toUpperCase() + ':/');
 
+const convertPathToWindowsDblBackslashFormat = (winUri: string) => convertPathToWindowsForwardSlashFormat(winUri).replace(/\//g, '\\\\');
+
 function defaultConvertWindowUri(): ConvertWindowUri {
 	const defaultFormat = vscode.workspace.getConfiguration("copy-path-unixstyle").get<string>("defaultFormat");
 	switch (defaultFormat) {
@@ -27,6 +29,7 @@ function defaultConvertWindowUri(): ConvertWindowUri {
 		case "WSL": return convertPathToWslFormat;
 		case "Cygwin": return convertPathToCygwinFormat;
 		case "WindowsForwardSlash": return convertPathToWindowsForwardSlashFormat;
+		case "WindowsDblBackslash": return convertPathToWindowsDblBackslashFormat;
 		default: 
 			vscode.window.showErrorMessage("Error in copy-path-unixstyle.defaultFormat setting - defaulting to GitBash");
 			return convertPathToGitBashFormat;
@@ -84,6 +87,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathWindowsForwardSlashFormat", (arg1, arg2) => {
 		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, convertPathToWindowsForwardSlashFormat, arg1, arg2);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyPathWindowsDblBackslashFormat", (arg1, arg2) => {
+		copyPathsToClipboardUnixStyle(CopyPathType.FULL_PATH, convertPathToWindowsDblBackslashFormat, arg1, arg2);
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("copy-path-unixstyle.copyRelativePath", (arg1, arg2) => {

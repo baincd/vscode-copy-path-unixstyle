@@ -29,7 +29,8 @@
 		"onCommand:copy-path-unixstyle.copyPathGitBashFormat",
 		"onCommand:copy-path-unixstyle.copyPathWSLFormat",
 		"onCommand:copy-path-unixstyle.copyPathCygwinFormat",
-		"onCommand:copy-path-unixstyle.copyPathWindowsForwardSlashFormat"
+		"onCommand:copy-path-unixstyle.copyPathWindowsForwardSlashFormat",
+		"onCommand:copy-path-unixstyle.copyPathWindowsDblBackslashFormat"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -42,13 +43,15 @@
 							"GitBash",
 							"WSL",
 							"Cygwin",
-							"WindowsForwardSlash"
+							"WindowsForwardSlash",
+							"WindowsDblBackslash"
 						],
 						"markdownEnumDescriptions": [
 							"Git Bash format (ex: `/c/Users/baincd/file.txt`)",
 							"WSL format (ex: `/mnt/c/Users/baincd/file.txt`)",
 							"Cygwin format (ex: `/cygdrive/c/Users/baincd/file.txt`)",
-							"Windows format using / (ex: `C:/Users/baincd/file.txt`)"
+							"Windows format using / (ex: `C:/Users/baincd/file.txt`)",
+							"Windows format using \\\\\\\\ (ex: `C:\\\\Users\\\\baincd\\\\file.txt`)"
 						],
 						"default": "GitBash",
 						"markdownDescription": "The default format to use for 'Copy Path (Unix Style)' and 'Copy Relative Path (Unix Style)' commands"
@@ -77,7 +80,13 @@
 						"type": "boolean",
 						"default": false,
 						"markdownDescription": "Enable 'Copy Path (Unix Style - Windows format using /)' command"
+					},
+					"copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable": {
+						"type": "boolean",
+						"default": false,
+						"markdownDescription": "Enable 'Copy Path (Unix Style - Windows format using \\\\\\\\)' command"
 					}
+
 				}
 			}
 		],
@@ -106,6 +115,11 @@
 				"command": "copy-path-unixstyle.copyPathWindowsForwardSlashFormat",
 				"title": "Copy Path (Unix Style - Windows format using /)",
 				"enablement": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable"
+			},
+			{
+				"command": "copy-path-unixstyle.copyPathWindowsDblBackslashFormat",
+				"title": "Copy Path (Unix Style - Windows format using \\\\)",
+				"enablement": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable"
 			},
 			{
 				"command": "copy-path-unixstyle.copyRelativePath",
@@ -140,6 +154,11 @@
 					"when": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable && isFileSystemResource"
 				},
 				{
+					"command": "copy-path-unixstyle.copyPathWindowsDblBackslashFormat",
+					"group": "6_copypath",
+					"when": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable && isFileSystemResource"
+				},
+				{
 					"command": "copy-path-unixstyle.copyRelativePath",
 					"group": "6_copypath",
 					"when": "isFileSystemResource"
@@ -170,6 +189,11 @@
 					"command": "copy-path-unixstyle.copyPathWindowsForwardSlashFormat",
 					"group": "1_cutcopypaste",
 					"when": "config.copy-path-unixstyle.copyPathWindowsForwardSlashFormat.enable && isFileSystemResource"
+				},
+				{
+					"command": "copy-path-unixstyle.copyPathWindowsDblBackslashFormat",
+					"group": "1_cutcopypaste",
+					"when": "config.copy-path-unixstyle.copyPathWindowsDblBackslashFormat.enable && isFileSystemResource"
 				},
 				{
 					"command": "copy-path-unixstyle.copyRelativePath",
