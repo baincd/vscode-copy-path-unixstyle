@@ -12,13 +12,19 @@ interface ConvertWindowUri {
 	(winUri: string): string
 }
 
-const convertPathToGitBashFormat             = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/$1/');
+function convertPath(winUri: string, driveLetterPart: (driveLetter: string) => string) {
+	return winUri
+		.replace(/\\/g, '/')
+		.replace(/^\/?([A-Za-z]):\//, (match, driveLetter: string) => driveLetterPart(driveLetter) + '/');
+}
 
-const convertPathToWslFormat                 = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/mnt/$1/');
+const convertPathToGitBashFormat             = (winUri: string) => convertPath(winUri, (driveLetter) => '/'          + driveLetter.toLowerCase()      );
 
-const convertPathToCygwinFormat              = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, '/cygdrive/$1/');
+const convertPathToWslFormat                 = (winUri: string) => convertPath(winUri, (driveLetter) => '/mnt/'      + driveLetter.toLowerCase()      );
 
-const convertPathToWindowsForwardSlashFormat = (winUri: string) => winUri.replace(/\\/g, '/').replace(/^\/?([A-Za-z]):\//, (match, driveLetter: string) => driveLetter.toUpperCase() + ':/');
+const convertPathToCygwinFormat              = (winUri: string) => convertPath(winUri, (driveLetter) => '/cygdrive/' + driveLetter.toLowerCase()      );
+
+const convertPathToWindowsForwardSlashFormat = (winUri: string) => convertPath(winUri, (driveLetter) =>                driveLetter.toUpperCase() + ':');
 
 const convertPathToWindowsDblBackslashFormat = (winUri: string) => convertPathToWindowsForwardSlashFormat(winUri).replace(/\//g, '\\\\');
 
